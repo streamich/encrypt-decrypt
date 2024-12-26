@@ -6,6 +6,22 @@ encryption and decryption using a password. Works in Browser and Node.js.
 
 ## Usage
 
+Browser:
+
+```html
+<script type="module">
+  import { encrypt, decrypt } from "//esm.sh/encrypt-decrypt-text";
+
+	const text = 'ho-ho-ho';
+  const cipher = await encrypt(text, 'santa');
+  const plaintext = await decrypt(cipher, 'santa');
+  
+  document.body.innerHTML = `<pre><code>Encoded: ${cipher}\n\nDecoded: ${plaintext}</code></pre>`;
+</script>
+```
+
+With NPM:
+
 ```javascript
 import { encrypt, decrypt } from 'encrypt-decrypt-text';
 
