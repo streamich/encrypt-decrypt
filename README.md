@@ -13,8 +13,9 @@ Browser:
   import { encrypt, decrypt } from "//esm.sh/encrypt-decrypt-text";
 
   const text = 'ho-ho-ho';
-  const cipher = await encrypt(text, 'santa');
-  const plaintext = await decrypt(cipher, 'santa');
+  const password = 'santa';
+  const cipher = await encrypt(text, password);
+  const plaintext = await decrypt(cipher, password);
   
   document.body.innerHTML = `
     <pre>
