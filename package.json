@@ -1,5 +1,5 @@
 {
-  "name": "encrypt-decrypt",
+  "name": "encrypt-decrypt-text",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
