@@ -3,6 +3,13 @@
 A very simple module which provides robust implementation for plain text
 encryption and decryption using a password. Works in Browser and Node.js.
 
+- Generates random password salt and IV (Initialization Vector) for each encryption
+  and stores them in the resulting cipher, separated by colon `:`.
+- Uses `AES-GCM` algorithms from the `WebCrypto` API in the Browser and `crypto` module in Node.js.
+- To generate a key from a password, uses `PBKDF2` algorithm with `SHA-256` hash function.
+  A random salt is generated for each key derivation and then `SHA-256` hash is
+  iterated 100,000 times.
+
 
 ## Usage
 
