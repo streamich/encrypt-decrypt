@@ -6,7 +6,7 @@ encryption and decryption using a password. Works in Browser and Node.js.
 
 ## Usage
 
-Browser:
+Browser ([JsDlivr CDN](https://cdn.jsdelivr.net/npm/encrypt-decrypt-text/index.js), [ESM.sh CDN](https://esm.sh/encrypt-decrypt-text@1.1.0)):
 
 ```html
 <script type="module">
