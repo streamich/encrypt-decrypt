@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>Encrypt / decrypt plain text with password</title>
+</head>
+<body>
+  <section>
+    <h2>Encrypt</h2>
+    <p>Plain text to encrypt:</p>
+    <textarea id="encryptPlainText" rows="8" style="width:100%"></textarea>
+    <br />
+    <p>Password:</p>
+    <input type="text" id="encryptPassword" placeholder="Password" />
+    <br />
+    <br />
+    <button id="encryptButton">Encrypt</button>
+    <p>Encrypted cipher text:</p>
+    <textarea id="encryptCipherText" rows="2" style="width:100%"></textarea>
+    <script type="module" crossorigin>
+      import { encrypt } from "https://cdn.jsdelivr.net/npm/encrypt-decrypt-text/index.js";
+      {
+        const button = document.getElementById("encryptButton");
+        button.addEventListener('click', async () => {
+          const plainText = document.getElementById("encryptPlainText").value;
+          const password = document.getElementById("encryptPassword").value;
+          const cipherText = await encrypt(plainText, password);
+          document.getElementById("encryptCipherText").value = cipherText;
+        });
+      }
+    </script>
+  </section>
+  <section>
+    <h2>Decrypt</h2>
+    <p>Cipher text to decrypt:</p>
+    <textarea id="decryptCipherText" rows="2" style="width:100%"></textarea>
+    <br />
+    <p>Password:</p>
+    <input type="text" id="decryptPassword" placeholder="Password" />
+    <br />
+    <br />
+    <button id="decryptButton">Decrypt</button>
+    <p>Decrypted plain text:</p>
+    <textarea id="decryptPlainText" rows="8" style="width:100%"></textarea>
+    <script type="module" crossorigin>
+      import { decrypt } from "https://cdn.jsdelivr.net/npm/encrypt-decrypt-text/index.js";
+      {
+        const button = document.getElementById("decryptButton");
+        button.addEventListener('click', async () => {
+          const cipherText = document.getElementById("decryptCipherText").value;
+          const password = document.getElementById("decryptPassword").value;
+          const plainText = await decrypt(cipherText, password);
+          document.getElementById("decryptPlainText").value = plainText;
+        });
+      }
+    </script>
+  </section>
+</body>
+</html>

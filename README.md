@@ -10,7 +10,7 @@ Browser ([JsDlivr CDN](https://cdn.jsdelivr.net/npm/encrypt-decrypt-text/index.j
 
 ```html
 <script type="module">
-  import { encrypt, decrypt } from "//esm.sh/encrypt-decrypt-text";
+  import { encrypt, decrypt } from "//cdn.jsdelivr.net/npm/encrypt-decrypt-text";
 
   const text = 'ho-ho-ho';
   const password = 'santa';
