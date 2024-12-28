@@ -42,3 +42,13 @@ import { encrypt, decrypt } from 'encrypt-decrypt-text';
 const encrypted = await encrypt('Hello World', 'password');
 const decrypted = await decrypt(encrypted, 'password');
 ```
+
+Also supports binary data as `Uint8Array`:
+
+```javascript
+import { encryptBinary, decryptBinary } from 'encrypt-decrypt-text';
+
+const plaintext = new Uint8Array([1, 2, 3, 4, 5]);
+const encrypted = await encryptBinary(plaintext, 'password');
+const decrypted = await decryptBinary(encrypted, 'password');
+```
