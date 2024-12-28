@@ -22,7 +22,7 @@ export const encrypt = async (plaintext, password) => {
   const bytes = stringToBytes(plaintext);
   const cipherBuffer = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, bytes);
   const cipher = new Uint8Array(cipherBuffer);
-  const fullCipher = new Uint8Array(salt.length + iv.length + cipher.length);
+  const fullCipher = new Uint8Array(28 + cipher.byteLength);
   fullCipher.set(salt);
   fullCipher.set(iv, 16);
   fullCipher.set(cipher, 28);
