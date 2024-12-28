@@ -19,21 +19,25 @@ export const encrypt = async (plaintext, password) => {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const key = await getKey(password, salt);
   const iv = crypto.getRandomValues(new Uint8Array(12));
-  const contentBytes = stringToBytes(plaintext);
-  const cipher = new Uint8Array(await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, contentBytes));
-  const line = `${bytesToBase64(salt)}:${bytesToBase64(iv)}:${bytesToBase64(cipher)}`;
+  const bytes = stringToBytes(plaintext);
+  const cipherBuffer = await crypto.subtle.encrypt({name: "AES-GCM", iv}, key, bytes);
+  const cipher = new Uint8Array(cipherBuffer);
+  const fullCipher = new Uint8Array(salt.length + iv.length + cipher.length);
+  fullCipher.set(salt);
+  fullCipher.set(iv, 16);
+  fullCipher.set(cipher, 28);
+  const line = bytesToBase64(fullCipher);
   const decrypted = await decrypt(line, password);
   if (decrypted !== plaintext) throw new Error('Test decoding failed.');
   return line;
 };
 
 export const decrypt = async (line, password) => {
-  const split = line.split(':');
-  const encryptedData = {salt: split[0], iv: split[1], cipher: split[2]};
-  const salt = base64ToBytes(encryptedData.salt);
+  const fullCipher = base64ToBytes(line);
+  const salt = fullCipher.slice(0, 16);
+  const iv = fullCipher.slice(16, 28);
+  const cipher = fullCipher.slice(28);
   const key = await getKey(password, salt);
-  const iv = base64ToBytes(encryptedData.iv);
-  const cipher = base64ToBytes(encryptedData.cipher);
   const contentBytes = new Uint8Array(await crypto.subtle.decrypt({name: "AES-GCM", iv}, key, cipher));
   return bytesToString(contentBytes);
 };
